@@ -2,7 +2,7 @@
 
 #include "logger.h"
 // basic options - fetch from file
-#define PORT 80
+#define PORT 8080
 #define HOSTNAME "ziraeth.me"
 #define CONFIG_FILE "./config.ini"
 
@@ -34,11 +34,11 @@ int main (void) {
     log_info("[MAIN INSTANCE OF SMILEY-SERVER v0.0.1]\n");
     // this will detail the expected behavior ------------------------
     load_config(CONFIG_FILE);
+    // bind handlers
     bind_handler(_handler);
+    // launch server
     launch(HOSTNAME, PORT);
-    // bind basic handlers
-    // unbind basic handlers
-    // close - shutdown
-
+    // shutdown server
+    shutdown_server(0);
     return EXIT_SUCCESS;
 }

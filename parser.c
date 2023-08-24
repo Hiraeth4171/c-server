@@ -1,32 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "utils.h"
+#include "parser.h"
 #include "logger.h"
-
-#define LINE_LENGTH 512
-
-typedef struct I_Server {
-    char* active_static_root;
-    char* static_root;
-
-    char* api_root;
-} I_Server;
-
-typedef struct I_API {
-    char* templates;
-} I_API;
-
-typedef struct I_Config {
-    I_Server server;
-    I_API api;
-} I_Config;
-
-typedef enum INI_Type {
-    SERVER,
-    API
-} INI_Type;
-
-// TODO: move to c file later
 
 char** allocate_string_array(int size) {
     char** lines = (char**)malloc(sizeof(char*) * size);
@@ -55,15 +30,7 @@ char** split_key_value_pair(char* input, char delim) {
     return ret;
 }
 
-//TODO: move to the logger file 
-void print_file(char** lines, int size, char* filename) {
-    //TODO: fill empty space, word-wrap
-    printf("\n\n\t\x1b[38;5;0m\x1b[48;5;15m%s ----------------------------------------------\x1b[0m\n", filename);
-    for (int i = 0; i < size; ++i) printf("\x1b[38;5;15m\t\t%s", lines[i]);
-    printf("\x1b[0m\n\n");
-}
-
-I_Config* parse(char* config_file) {
+I_Config* parse_ini(char* config_file) {
     //create struct
     I_Config* config = (I_Config*)malloc(sizeof(I_Config));
     
@@ -127,6 +94,10 @@ I_Config* parse(char* config_file) {
                         server.static_root = key_value[1];
                     } else if (!str_cmp(key_value[0], "api_root")) {
                         server.api_root = key_value[1];
+                    } else if (!str_cmp(key_value[0], "hostname")) {
+                        server.hostname = key_value[1];
+                    } else if (!str_cmp(key_value[0], "port")) {
+                        server.port = (int)atoi(key_value[1]);
                     } else {
                         log_err(10, "PROBLEM.");
                     }
@@ -139,11 +110,11 @@ I_Config* parse(char* config_file) {
                     }
                     break;
             }
+            free(lines[i]);
         }
     }
-
+    free(lines);
     *config = (I_Config){server, api};
     return config;
+
 }
-
-
