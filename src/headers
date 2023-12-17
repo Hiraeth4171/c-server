@@ -1,0 +1,7 @@
+Server: Smiley
+Accept-Ranges: bytes
+Access-Control-Max-Age: 86400
+Content-Language: en
+X-Frame-Options: deny
+X-Powered-By: C
+X-Version: ISO/IEC 9899:2018
