@@ -37,7 +37,7 @@ int main (void) {
     // bind handlers
     bind_handler(_handler);
     // launch server
-    launch_server();
+    launch_server(); // LOOPS
     // shutdown server
     shutdown_server(0);
     return EXIT_SUCCESS;

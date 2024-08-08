@@ -142,17 +142,17 @@ void launch_server () {
         print_req(buff, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
         long* len = malloc(sizeof(long));
         char* req_line = get_request_line(buff);
-        printf("\n01:req_line:%s\n", req_line);
+        //printf("\n01:req_line:%s\n", req_line);
         while (*req_line != ' ') req_line++;
         req_line++;
-        printf("\n02:req_line:%s\n", req_line);
+        //printf("\n02:req_line:%s\n", req_line);
         char* path = (char *)calloc(sizeof(char), SMALL_BUFFER_SIZE);
         char* ptr = path;
         while (*req_line != ' ') {
             *ptr++ = *req_line++;
         }
-        printf("\n03:req_line:%s\n", req_line);
-        printf("\npath: %s\n", path);
+        //printf("\n03:req_line:%s\n", req_line);
+        //printf("\npath: %s\n", path);
         char* filepath = find_route(path);
         if(!validate_path(filepath)) {
             log_err(42, "invalid path: filepath: %s", filepath);
@@ -162,7 +162,6 @@ void launch_server () {
             continue;
         }
         File_Type t = determine_filetype(filepath);
-        printf(t == F_ASCII ? "r" : "rb");
         char* index = pread_file(filepath, len, t == F_ASCII ? "r" : "rb+");
         char* length = (char*)calloc(sizeof(char), 64);
         char* type = (char*)calloc(sizeof(char), 64);
@@ -179,7 +178,6 @@ void launch_server () {
         str_cat(response, length, end_ptr);
         str_cat(response, "\r\n\r\n", end_ptr);
         bin_cat(response, index, end_ptr, *len);
-        printf("%s", temp);
         temp[response_length] = '\0';
         count = write(new_sockfd, temp, response_length);
         if (count < 0) {

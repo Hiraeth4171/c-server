@@ -17,6 +17,7 @@
 
 char* get_mimetype() {
     char* type = "do stuff here";
+    
     return type;
 }
 
@@ -56,11 +57,9 @@ void init_router(I_Config config) {
 char* find_route(char* routing_string) {
     printf("%s\n\n", routing_string);
     if (*routing_string == '/' && str_len(routing_string) <= 1) routing_string = "/index.html";
-    printf("%s\n\n", routing_string);
     char* filepath = (char*)calloc(sizeof(char),(str_len(routing_string) + str_len(local_config.server.static_root))+1);
     str_cat(filepath, local_config.server.static_root, NULL);
     str_cat(filepath, routing_string, NULL);
-    printf("%s", filepath);
     return filepath;
 }
 

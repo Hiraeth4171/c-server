@@ -76,7 +76,6 @@ char* pread_file(char* filepath, long *len, char* type) {
     fseek(fp, 0L, SEEK_END);
     l_size = ftell(fp);
     rewind(fp);
-    printf("\nl_size : %ld\n", l_size);
     buffer = (char*)calloc(l_size+1, sizeof(char));
     if (buffer == NULL) {
         fclose(fp);
@@ -90,7 +89,6 @@ char* pread_file(char* filepath, long *len, char* type) {
         log_err(-96,"FILE READ FAILED file: %s", filepath);
         exit(1);
     }
-    perror("bruh: ");
     *len = l_size;
     fclose(fp);
     return buffer; // :D

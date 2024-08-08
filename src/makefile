@@ -11,3 +11,5 @@ run:
 	sudo ../build/setup.sh
 	../build/server
 
+clean:
+	rm -f vgcore.*
