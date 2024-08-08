@@ -43,8 +43,8 @@ contentSwitcher(
     "color:#141414 !important;background-color:#aaaaaaaa",
     "switcher",
     account,
-    cb(div(text("hi"))),
-    cb(div()),
-    cb(div()),
-    cb(div())
+    cb(div(text("Settings"))),
+    cb(div(text("Statistics"))),
+    cb(div(text("Applications"))),
+    cb(div(text("Logout")))
 );

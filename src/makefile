@@ -8,8 +8,8 @@ debug:
 	gcc -g -Wall main.c router.c ./utils/utils.c ./utils/logger.c ./backends/server.c ./utils/parser.c -o ../build/server
 
 run:
-	sudo ../build/setup.sh
-	../build/server
+	cd ../build/
+	./run.sh
 
 clean:
 	rm -f vgcore.*
