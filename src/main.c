@@ -32,7 +32,6 @@ int main (void) {
     #endif
 
     log_info("[MAIN INSTANCE OF SMILEY-SERVER v0.0.1]\n");
-    // this will detail the expected behavior ------------------------
     load_config(CONFIG_FILE);
     // bind handlers
     bind_handler(_handler);
