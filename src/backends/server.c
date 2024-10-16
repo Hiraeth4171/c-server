@@ -1,7 +1,7 @@
 #include "../utils/logger.h"
 #include "./server.h"
 #include "../utils/utils.h"
-#include "../router.h" // parser
+#include "../router.h" 
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
