@@ -9,6 +9,7 @@
 #include "router.h"
 #include "utils/utils.h"
 #include <stdbool.h>
+#include <fs/fs.h>
 
 #ifdef WIN32
 #include <io.h>
@@ -52,6 +53,7 @@ I_Config local_config;
 
 void init_router(I_Config config) {
     local_config = config;
+    fs_init(0);
 }
 
 char* find_route(char* routing_string) {
@@ -71,7 +73,8 @@ bool validate_path(char* filepath) {
 }
 
 File_Type determine_filetype(char* file) {
-    char* mimetype = get_mimetype(file);
+    FileHandler* fh = fs_create_filehandler(file, "r+");
+    char* mimetype = (char*)fs_get_mimetype(fh);
     // image/
     if (str_n_cmp(mimetype, "image/", 5) == 0) {
         return F_BIN;

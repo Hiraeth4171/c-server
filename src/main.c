@@ -1,6 +1,6 @@
 #include <stdlib.h>
-
 #include "./utils/logger.h"
+
 // basic options - fetch from file
 #define PORT 80
 #define HOSTNAME "ziraeth.me"
@@ -31,12 +31,15 @@ int main (void) {
     log_info("LOADED WINDOWS BACKEND\n");
     #endif
 
-    log_info("[MAIN INSTANCE OF SMILEY-SERVER v0.0.1]\n");
+    log_info("[MAIN INSTANCE OF SMILEY-SERVER v1.0.0]\n");
     load_config(CONFIG_FILE);
-    // bind handlers
+    // 
+
+
+    // bind request handler
     bind_handler(_handler);
     // launch server
-    launch_server(); // LOOPS
+    launch_server();
     // shutdown server
     shutdown_server(0);
     return EXIT_SUCCESS;
