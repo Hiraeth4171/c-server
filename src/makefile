@@ -1,6 +1,10 @@
+FS_DIR := ../fs/
+OUT_DIR:=../build/
 build: 
 	clear
-	gcc -Wall main.c router.c ./utils/utils.c ./utils/logger.c ./backends/server.c ./utils/parser.c -I../fs/src/include/ -L../fs/bin/ -lfs -lmagic -o ../build/server
+	$(MAKE) -C $(FS_DIR)
+	mkdir -p $(OUT_DIR)
+	gcc -Wall main.c router.c ./utils/utils.c ./utils/logger.c ./backends/server.c ./utils/parser.c -I$(FS_DIR)src/include/ -L$(FS_DIR)bin -lfs -lmagic -o $(OUT_DIR)/server
 
 debug:
 	clear
